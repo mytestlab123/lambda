@@ -1,17 +1,17 @@
 import json
 
 def lambda_handler(event, context):
-    print (event.keys())
-    print ("===============")
-    print (json.dumps(event))
-    print ("===============")
+    event = json.dumps(event['body'])
+    event = json.loads(event)
     print (event)
-    # body = json.loads(event['body'])
-    # body = json.loads(event)
+    print ("===============")
+    # print (json.loads(event))
+    key1 = event['key1']
+    print (key1)
     return {
         "isBase64Encoded": "false",
         "statusCode": 200,
-        "body": json.dumps(event),
+        "body": event,
         "headers": {
             "content-type": "application/json"
         }

@@ -15,7 +15,7 @@ curl -X POST \
 
 * Lambda Invoke
 ```bash
-aws lambda invoke --function-name ${fun} --payload file://events/event2.json outputfile.txt  --cli-binary-format raw-in-base64-out
+aws lambda invoke --function-name ${fun} --payload file://events/event2.json outputfile.txt  --cli-binary-format raw-in-base64-out --debug
 {
     "StatusCode": 200,
     "ExecutedVersion": "$LATEST"
