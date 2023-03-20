@@ -2,19 +2,26 @@ import json
 
 def lambda_handler(event, context):
     org = event
-    print (list(event.keys())[0])
-    print (list(event.keys())[1])
-    print (list(event.keys())[2])
+    # print (list(event.keys())[0])
+    # print (list(event.keys())[1])
+    # print (list(event.keys())[2])
 
     print (event.keys())
     print (event.values())
+    event_dict = json.loads(event['body'])
+    print (event_dict)
+    print (event_dict['key1'])
+    print (event_dict['key2'])
+    print (event_dict['key3'])
+    print (event_dict['key4'])
+    
     print ("===============")
-    # print (event['body'])
+    print (event['body'])
     # exit (0)
 
-    # print (json.dumps(event))
-    # print (json.dumps(event['body']))
-    # print ("===============")
+    print (json.dumps(event))
+    print (json.dumps(event['body']))
+    print ("===============")
     # print (json.dumps(event['body'])['key1'])
     # print ("===============")
     # print (json.loads(event['body'])['key2'])
