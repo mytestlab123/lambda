@@ -66,19 +66,25 @@ def lambda_handler(event, context):
         result = helper.build_tx(swap_tx,'high') # prepare the transaction for signing, gas price defaults to fast.
         print("\n\n")
         print ("swap_tx:", swap_tx)
+        print ("swap_tx.keys ==>", swap_tx.keys())
         print (type(swap_tx))
         print("\n\n")
-        print ("result:", result)
-        print (type(result))
+        # print ("result:", result)
+        # print (type(result))
         print("\n\n")
         result = helper.sign_tx(result) # sign the transaction using your private key
         swap_result = helper.broadcast_tx(result) #broadcast the transaction to the network and wait for the receipt. 
-        # web3.eth.waitForTransactionReceipt(swap_result)
-
-        # print("\n\n")
-        # print (type(swap_result))
-        # print("swap_result:", swap_result)
         print("\n\n")
+        print (type(swap_result))
+        print("swap_result:", swap_result)
+        print("\n\n")
+        # web3.eth.waitForTransactionReceipt(swap_result)
+        # print ("result.keys ==>", result.keys())
+        print("\n\n")
+        # print ("swap_result.keys ==>", swap_result.keys())
+        print("\n\n")
+        # print (swap_result['transactionHash'])
+
         rows.append(row)
         i = i + 1
         print(i, " of ", row_count, " coins bought", row[0], " worth $", investment_amount)

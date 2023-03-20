@@ -8,7 +8,7 @@ def lambda_handler(event, context):
 
     print (event.keys())
     print (event.values())
-    event_dict = json.loads(event)
+    event_dict = json.loads(event['body'])
     print (event_dict)
     print (event_dict['key1'])
     print (event_dict['key2'])
@@ -45,7 +45,7 @@ def lambda_handler(event, context):
     return {
         "isBase64Encoded": "false",
         "statusCode": 200,
-        "body": {"hi": "there"},
+        "body": json.dumps(org),
         "headers": {
             "content-type": "application/json"
         }
