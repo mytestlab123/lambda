@@ -6,11 +6,12 @@ from os import system
 
 
 def lambda_handler(event, context):
-    rpc_url = "https://arbitrum-mainnet.infura.io/v3/d162e1d2d54e4fd5b07a78b9b9176728"
+    # rpc_url = "https://optimism-mainnet.infura.io/v3/031bbd7a436b427881ed1b80f9bceb9e"
+    rpc_url = "https://optimism-mainnet.infura.io/v3/d162e1d2d54e4fd5b07a78b9b9176728"
+    # rpc_url = "https://arbitrum-mainnet.infura.io/v3/d162e1d2d54e4fd5b07a78b9b9176728"
     # rpc_url = "https://polygon-mainnet.infura.io/v3/d162e1d2d54e4fd5b07a78b9b9176728"
     # referrerAddress="0xbd0B3cB386314a7d4c314825727Aa4CCE2FA5e1b"
     referrerAddress=""
-    # chain = 'arbitrum'
     print ("event ==>", event)
     final_body = json.dumps(json.loads(event['body']),indent=4)
     print ("final_body ==>", final_body)
@@ -24,9 +25,7 @@ def lambda_handler(event, context):
     print ("message ==>", message)
     chain = event['chain']
     print ("chain ==>", chain)
-    # URL = "https://gist.githubusercontent.com/amitkarpe/ae5520f53d0d12d0202fd3a8d24e2e2d/raw/3b600ef1d886d4dc6a58f35fb86d86cec781fc4b/arbitrum.csv"
     URL = event['portfolio']
-    # portfolio = "/tmp/portfolio/defi"+str(random.randint(1,100000))+".csv"
     portfolio = "/tmp/portfolio_"+str(random.randint(1,100000))+".csv"
     response = wget.download(URL, portfolio)
     print ("\n Portfolio File Name ==>", portfolio)
@@ -113,8 +112,8 @@ def lambda_handler(event, context):
     print("All coins bought")
     print(rows)
     print("\n\n")
-    print("Check Recever: https://polygonscan.com/address/"+destReceiver+"#tokentxns")
-    print("Check Sender: https://polygonscan.com/address/"+public_key)
+    # print("Check Recever: https://optimistic.etherscan.io/address/"+destReceiver+"#tokentxns")
+    print("Check Sender: https://optimistic.etherscan.io/address/"+public_key)
     file.close()
     return {
         "isBase64Encoded": "false",
