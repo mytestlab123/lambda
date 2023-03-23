@@ -1,0 +1,1 @@
+curl -s https://api.1inch.io/v5.0/42161/tokens | jq '.tokens[] | select(.symbol=="USDC")'
