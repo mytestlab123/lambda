@@ -1,3 +1,4 @@
 Symbol,Name,Coingecko,Address
 DAI, DAI, https://www.coingecko.com/en/coins/dai, 0x44fa8e6f47987339850636f88629646662444217
 USDT, USDT, https://www.coingecko.com/en/coins/tether, 0x4ecaba5870353805a9f068101a40e0f32ed605c6
+XDAI, Wrapped XDAI, https://www.coingecko.com/en/coins/wrapped-xdai, 0xe91d153e0b41518a2ce8dd3d7944fa863463a97d
