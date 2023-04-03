@@ -6,10 +6,7 @@ from os import system
 
 
 def lambda_handler(event, context):
-    # rpc_url = "https://optimism-mainnet.infura.io/v3/031bbd7a436b427881ed1b80f9bceb9e"
-    rpc_url = "https://optimism-mainnet.infura.io/v3/d162e1d2d54e4fd5b07a78b9b9176728"
-    # rpc_url = "https://arbitrum-mainnet.infura.io/v3/d162e1d2d54e4fd5b07a78b9b9176728"
-    # rpc_url = "https://polygon-mainnet.infura.io/v3/d162e1d2d54e4fd5b07a78b9b9176728"
+    rpc_url = "https://gnosischain-rpc.gateway.pokt.network"
     # referrerAddress="0xbd0B3cB386314a7d4c314825727Aa4CCE2FA5e1b"
     referrerAddress=""
     print ("event ==>", event)
@@ -22,6 +19,18 @@ def lambda_handler(event, context):
     print ("===============")
 
     message = event['message']
+    # Open secret key from AWS S3 using Python boto3
+
+    # Compare message with the secret key
+    if message != "wPjAPGc3o0rwp0BO48pVQ":
+        return {
+            "isBase64Encoded": "false",
+            "statusCode": 403,
+            "body": "Access Denied",
+            "headers": {
+                "content-type": "application/json"
+            }
+        }
     print ("message ==>", message)
     chain = event['chain']
     print ("chain ==>", chain)
@@ -79,8 +88,8 @@ def lambda_handler(event, context):
         print("\n\n")
         print("\n",i+1, " ==> ", row[0]) 
         swap_tx = exchange.get_swap("USDC", row[0], investment_amount, 1, destReceiver=destReceiver) # get the swap transaction
-        result = helper.build_tx(swap_tx,'low') # prepare the transaction for signing, gas price defaults to fast.
-        # result = helper.build_tx(swap_tx,'high') # prepare the transaction for signing, gas price defaults to fast.
+        # result = helper.build_tx(swap_tx,'low') # prepare the transaction for signing, gas price defaults to fast.
+        result = helper.build_tx(swap_tx,'high') # prepare the transaction for signing, gas price defaults to fast.
         print("\n\n")
         # print ("swap_tx:", swap_tx)
         # print ("swap_tx.keys ==>", swap_tx.keys())
@@ -113,7 +122,7 @@ def lambda_handler(event, context):
     print(rows)
     print("\n\n")
     # print("Check Recever: https://optimistic.etherscan.io/address/"+destReceiver+"#tokentxns")
-    print("Check Sender: https://optimistic.etherscan.io/address/"+public_key)
+    print("Check Sender: https://gnosisscan.io/address/"+public_key)
     file.close()
     return {
         "isBase64Encoded": "false",

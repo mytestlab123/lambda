@@ -16,5 +16,5 @@
     #     "fantom": "250"
     # }
 
-export chain_id=10
+export chain_id=100
 curl -s https://api.1inch.io/v5.0/10/tokens | jq '.tokens[]' | grep "symbol" | cut -d '"' -f 4 | sort

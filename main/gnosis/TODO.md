@@ -8,5 +8,6 @@
 * Using [Infura Account](https://app.infura.io/dashboard/ethereum/), get RPC address.
 # TODO: Add fund into given wallet and test with minimum investment amount for small portfolio.
 * Using [https://chainlist.org/](https://chainlist.org/) and MetaMask or any other Web3 Wallet.
+* Using MM please give permission to spend "USDC". i.e. Set a spending cap for your coin/contract.
 
 
