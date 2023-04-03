@@ -3,6 +3,7 @@ import json, csv, random, wget
 import time, sys, requests
 from web3 import Web3
 from os import system
+import boto3
 
 
 def lambda_handler(event, context):
@@ -19,10 +20,27 @@ def lambda_handler(event, context):
     print ("===============")
 
     message = event['message']
-    # Open secret key from AWS S3 using Python boto3
+    # Open secret key from AWS S3 bucket name as "project-ubuntu-gnosis-2023" and file name as "secret.key" using Python boto3
+    bucket_name = 'project-ubuntu-gnosis-2023'
+    file_name = 'secret.key'
+
+    # Set the name of your AWS profile (optional)
+    aws_profile_name = 'default'
+
+    # Create an S3 resource using the specified AWS profile (if provided)
+    # session = boto3.Session(profile_name=aws_profile_name)
+    # s3 = session.resource('s3')
+    s3 = boto3.resource('s3')
+
+    # Get the contents of the file
+    obj = s3.Object(bucket_name, file_name)
+    contents = obj.get()['Body'].read().decode('utf-8')
+    print ("contents ==>", contents)
+    print ("message ==>", message)
 
     # Compare message with the secret key
-    if message != "wPjAPGc3o0rwp0BO48pVQ":
+    # if message != contents:
+    if message not in contents:
         return {
             "isBase64Encoded": "false",
             "statusCode": 403,
