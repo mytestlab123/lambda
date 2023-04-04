@@ -9,5 +9,8 @@
 # TODO: Add fund into given wallet and test with minimum investment amount for small portfolio.
 * Using [https://chainlist.org/](https://chainlist.org/) and MetaMask or any other Web3 Wallet.
 * Using MM please give permission to spend "USDC". i.e. Set a spending cap for your coin/contract.
-
-
+# TODO: Add allowance support
+* USDC: 0xddafbb505ad214d7b80b1f830fccc89b60fb7a83
+* USDT: 0x4ecaba5870353805a9f068101a40e0f32ed605c6
+* 1inch: 0x1111111254fb6c44bac0bed2854e76f90643097d
+* Spender: 0x1111111254eeb25477b68fb85ed929f73a960582

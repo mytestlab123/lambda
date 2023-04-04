@@ -16,5 +16,15 @@
     #     "fantom": "250"
     # }
 
-export chain_id=100
-curl -s https://api.1inch.io/v5.0/${chain_id}/tokens | jq '.tokens[]' | grep "symbol" | cut -d '"' -f 4 | sort
+#export chain_id=100; curl -s https://api.1inch.io/v5.0/${chain_id}/tokens | jq '.tokens[]' | grep "symbol" | cut -d '"' -f 4 | sort
+
+export chain_id=100; curl -s https://api.1inch.io/v5.0/${chain_id}/tokens | jq '.tokens[]' | grep "symbol" | cut -d '"' -f 4 | sort | grep -vi REALTOKEN
+
+# List all tokens on 1inch for given blockchain and 
+# List of liquidity sources that are available for routing in the 1inch Aggregation protocol
+
+curl  https://api.1inch.io/v5.0/100/liquidity-sources 
+
+curl -s  https://api.1inch.io/v5.0/100/presets | jq .
+
+curl  https://api.1inch.io/v5.0/100/tokens | jq '.tokens[]' | grep "symbol" | cut -d '"' -f 4 | sort | grep -vi REALTOKEN

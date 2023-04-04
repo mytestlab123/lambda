@@ -83,7 +83,18 @@ def lambda_handler(event, context):
     # print (rows)
     exchange = OneInchSwap(public_key, chain=chain) # initialise the OneInchSwap object as "exchange"
     helper = TransactionHelper(rpc_url, public_key, private_key, chain=chain) # initialise the TransactionHelper object as "helper"
+    amount = 10000000000
+    if event['investment_token'] != "USDC":
+        investment_token = event['investment_token']
+    else:
+        investment_token = "USDC"
+    print ("investment_token ==>", investment_token)
 
+    approveal_tx = exchange.get_approve (from_token_symbol=investment_token, amount=amount)
+    built = helper.build_tx(approveal_tx, 'high') # prepare the transaction for signing, gas price defaults to fast.
+    signed = helper.sign_tx(built) # sign the transaction using your private key
+    approval_result = helper.broadcast_tx(signed) #broadcast the transaction to the network and wait for the receipt.
+    print ("approval_result ==>", approval_result)
     row_count = sum(1 for row in file) - 1
     print("Total coins (Portfolio Size): ",row_count)
     print("Total Investment Ammount: ",total_investment_amount)
@@ -105,7 +116,7 @@ def lambda_handler(event, context):
     for row in csvreader:
         print("\n\n")
         print("\n",i+1, " ==> ", row[0]) 
-        swap_tx = exchange.get_swap("USDC", row[0], investment_amount, 1, destReceiver=destReceiver) # get the swap transaction
+        swap_tx = exchange.get_swap(investment_token, row[0], investment_amount, 1, destReceiver=destReceiver) # get the swap transaction
         # result = helper.build_tx(swap_tx,'low') # prepare the transaction for signing, gas price defaults to fast.
         result = helper.build_tx(swap_tx,'high') # prepare the transaction for signing, gas price defaults to fast.
         print("\n\n")
