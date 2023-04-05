@@ -14,3 +14,12 @@
 * USDT: 0x4ecaba5870353805a9f068101a40e0f32ed605c6
 * 1inch: 0x1111111254fb6c44bac0bed2854e76f90643097d
 * Spender: 0x1111111254eeb25477b68fb85ed929f73a960582
+
+# TODO: Refacor the code to break into small functions 
+# TODO: Test everything on Mac without using docker 
+
+
+# pip install -r main/requirements.txt
+# pip install python-lambda-local
+# export PATH=$PATH:/Users/user/Library/Python/3.9/bin # On Mac
+# python-lambda-local -f lambda_handler main/app.py secret.json -t 6000
