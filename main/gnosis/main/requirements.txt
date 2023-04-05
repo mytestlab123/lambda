@@ -6,3 +6,4 @@ wget
 #json 
 #csv 
 #random
+boto3==1.26.94
