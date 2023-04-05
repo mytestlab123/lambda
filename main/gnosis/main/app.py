@@ -7,6 +7,7 @@ import boto3
 
 # pip install -r main/requirements.txt
 # pip install python-lambda-local
+# export PATH=$PATH:/Users/user/Library/Python/3.9/bin # On Mac
 # python-lambda-local -f lambda_handler main/app.py secret.json -t 6000
 
 def lambda_handler(event, context):
