@@ -1,21 +1,27 @@
-from oneinch_py import OneInchSwap, TransactionHelper
+from oneinch_py import OneInchSwap, TransactionHelper, OneInchOracle
 import json, csv, random, wget
 import time, sys, requests
 from web3 import Web3
 from os import system
 import boto3
 
+# pip install -r main/requirements.txt
+# pip install python-lambda-local
+# export PATH=$PATH:/Users/user/Library/Python/3.9/bin # On Mac
+# python-lambda-local -f lambda_handler main/app.py secret.json -t 6000
 
 def lambda_handler(event, context):
+    print ("event ==>", event)
     rpc_url = "https://gnosischain-rpc.gateway.pokt.network"
     # referrerAddress="0xbd0B3cB386314a7d4c314825727Aa4CCE2FA5e1b"
     referrerAddress=""
-    print ("event ==>", event)
-    final_body = json.dumps(json.loads(event['body']),indent=4)
-    print ("final_body ==>", final_body)
-    print ("===============")
-    body_dict = json.loads(event['body'])
-    event = body_dict
+    final_body = event
+    # print ("event ==>", event)
+    # final_body = json.dumps(json.loads(event['body']),indent=4)
+    # print ("final_body ==>", final_body)
+    # print ("===============")
+    # body_dict = json.loads(event['body'])
+    # event = body_dict
     print ("body_dict ==>", event)
     print ("===============")
 
@@ -83,14 +89,16 @@ def lambda_handler(event, context):
     # print (rows)
     exchange = OneInchSwap(public_key, chain=chain) # initialise the OneInchSwap object as "exchange"
     helper = TransactionHelper(rpc_url, public_key, private_key, chain=chain) # initialise the TransactionHelper object as "helper"
-    amount = 10000000000
+    # oracle = OneInchOracle(rpc_url, chain=chain) # initialise the OneInchOracle object as "oracle"
+
+    # amount = 10000000000
     if event['investment_token'] != "USDC":
         investment_token = event['investment_token']
     else:
         investment_token = "USDC"
     print ("investment_token ==>", investment_token)
 
-    approveal_tx = exchange.get_approve (from_token_symbol=investment_token, amount=amount)
+    approveal_tx = exchange.get_approve (from_token_symbol=investment_token)
     built = helper.build_tx(approveal_tx, 'high') # prepare the transaction for signing, gas price defaults to fast.
     signed = helper.sign_tx(built) # sign the transaction using your private key
     approval_result = helper.broadcast_tx(signed) #broadcast the transaction to the network and wait for the receipt.
@@ -116,6 +124,11 @@ def lambda_handler(event, context):
     for row in csvreader:
         print("\n\n")
         print("\n",i+1, " ==> ", row[0]) 
+
+        # token = row[0]
+        # investment_token = "WXDAI"
+        # rate = oracle.get_rate(src_token=exchange._token_to_address(token), dst_token=exchange._token_to_address(investment_token), src_token_decimal=18, dst_token_decimal=18)
+        # print ("1 ", token,"= ", rate, investment_token)
         swap_tx = exchange.get_swap(investment_token, row[0], investment_amount, 1, destReceiver=destReceiver) # get the swap transaction
         # result = helper.build_tx(swap_tx,'low') # prepare the transaction for signing, gas price defaults to fast.
         result = helper.build_tx(swap_tx,'high') # prepare the transaction for signing, gas price defaults to fast.
