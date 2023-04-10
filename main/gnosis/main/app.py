@@ -121,7 +121,6 @@ def lambda_handler(event, context):
     i = 0
     print("Buying coins started ...")
     print("Please wait ...")
-    exit ()
     for row in csvreader:
         print("\n\n")
         print("\n",i+1, " ==> ", row[0]) 
