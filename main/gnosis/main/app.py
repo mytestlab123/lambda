@@ -99,6 +99,8 @@ def lambda_handler(event, context):
     tokens = exchange.get_tokens()
     print ("Token: ", tokens[investment_token]['symbol'], "Address: ", tokens[investment_token]['address'], "Decimals: ", tokens[investment_token]['decimals'])
     result = helper.get_ERC20_balance(exchange._token_to_address(investment_token), decimal=tokens[investment_token]['decimals'])
+    print ("Token: ", tokens[investment_token])
+
     print ("")
     if result == 0:
         print ("You don't have any tokens to swap.")
@@ -136,12 +138,19 @@ def lambda_handler(event, context):
     i = 0
     print("Buying coins started ...")
     print("Please wait ...")
-    print ("Exiting ...")
+    # print ("Exiting ...")
     # exit ()
     for row in csvreader:
         print("\n\n")
         print("\n",i+1, " ==> ", row[0]) 
-
+        # buy_token = row[0]
+        # TODO: need to check address base buy 
+        # example: Kyber Network Crystal v2 (PoS) (KNC)
+        # 0x1534fB3E82849314360C267FE20Df3901A2ED3f9
+        # if len(buy_token) != 42:
+            # print ("This Token address, you please validate yourself: ", len(buy_token), buy_token)
+            # result = helper.get_ERC20_balance(exchange._token_to_address(buy_token), decimal=tokens[buy_token]['decimals'])
+            # print("Token: ", tokens[buy_token]['symbol'], "Balance: ", result, "Name: ", tokens[buy_token]['name'],  "Address: ", tokens[buy_token]['address'], "Decimals: ", tokens[buy_token]['decimals'])
         # token = row[0]
         # investment_token = "WXDAI"
         # rate = oracle.get_rate(src_token=exchange._token_to_address(token), dst_token=exchange._token_to_address(investment_token), src_token_decimal=18, dst_token_decimal=18)
@@ -149,7 +158,7 @@ def lambda_handler(event, context):
         swap_tx = exchange.get_swap(investment_token, row[0], investment_amount, 1, destReceiver=destReceiver) # get the swap transaction
         # result = helper.build_tx(swap_tx,'low') # prepare the transaction for signing, gas price defaults to fast.
         result = helper.build_tx(swap_tx,'high') # prepare the transaction for signing, gas price defaults to fast.
-        print("\n\n")
+        # print("\n\n")
         # print ("swap_tx:", swap_tx)
         # print ("swap_tx.keys ==>", swap_tx.keys())
         # print (type(swap_tx))
