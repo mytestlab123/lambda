@@ -16,13 +16,14 @@ def lambda_handler(event, context):
     # referrerAddress="0xbd0B3cB386314a7d4c314825727Aa4CCE2FA5e1b"
     referrerAddress=""
     final_body = event
+    # Using following code for real deployment 
     # print ("event ==>", event)
-    # final_body = json.dumps(json.loads(event['body']),indent=4)
+    final_body = json.dumps(json.loads(event['body']),indent=4)
     # print ("final_body ==>", final_body)
-    # print ("===============")
-    # body_dict = json.loads(event['body'])
-    # event = body_dict
-    print ("body_dict ==>", event)
+    print ("===============")
+    body_dict = json.loads(event['body'])
+    event = body_dict
+    # print ("body_dict ==>", event)
     print ("===============")
 
     message = event['message']
@@ -115,11 +116,13 @@ def lambda_handler(event, context):
     
 
     # TODO: Check if the investment token is approved for spending by the smart contract in function
-    # approveal_tx = exchange.get_approve (from_token_symbol=investment_token)
-    # built = helper.build_tx(approveal_tx, 'high') # prepare the transaction for signing, gas price defaults to fast.
-    # signed = helper.sign_tx(built) # sign the transaction using your private key
-    # approval_result = helper.broadcast_tx(signed) #broadcast the transaction to the network and wait for the receipt.
-    # print ("approval_result ==>", approval_result)
+    approveal_tx = exchange.get_approve (from_token_symbol=investment_token)
+    built = helper.build_tx(approveal_tx, 'high') # prepare the transaction for signing, gas price defaults to fast.
+    signed = helper.sign_tx(built) # sign the transaction using your private key
+    approval_result = helper.broadcast_tx(signed) #broadcast the transaction to the network and wait for the receipt.
+    print ("approval_result ==>", approval_result)
+
+    
     row_count = sum(1 for row in file) - 1
     print("Total coins (Portfolio Size): ",row_count)
     print("Total Investment Ammount: ",total_investment_amount)
@@ -196,8 +199,8 @@ def lambda_handler(event, context):
         "isBase64Encoded": "false",
         "statusCode": 200,
         # "body": "successful",
-        # "body": '{"message": "hello world"}',
-        "body": final_body,
+        "body": '{"message": "successful"}',
+        # "body": final_body,
         "headers": {
             "content-type": "application/json"
         }

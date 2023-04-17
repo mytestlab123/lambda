@@ -12,16 +12,17 @@ import boto3
 
 def lambda_handler(event, context):
     print ("event ==>", event)
-    rpc_url = "https://gnosischain-rpc.gateway.pokt.network"
+    # rpc_url = "https://gnosischain-rpc.gateway.pokt.network"
+    rpc_url = "https://polygon-mainnet.infura.io/v3/d162e1d2d54e4fd5b07a78b9b9176728"
     # referrerAddress="0xbd0B3cB386314a7d4c314825727Aa4CCE2FA5e1b"
     referrerAddress=""
     final_body = event
     # print ("event ==>", event)
-    # final_body = json.dumps(json.loads(event['body']),indent=4)
+    final_body = json.dumps(json.loads(event['body']),indent=4)
     # print ("final_body ==>", final_body)
-    # print ("===============")
-    # body_dict = json.loads(event['body'])
-    # event = body_dict
+    print ("===============")
+    body_dict = json.loads(event['body'])
+    event = body_dict
     print ("body_dict ==>", event)
     print ("===============")
 
@@ -195,9 +196,8 @@ def lambda_handler(event, context):
     return {
         "isBase64Encoded": "false",
         "statusCode": 200,
-        # "body": "successful",
-        # "body": '{"message": "hello world"}',
-        "body": final_body,
+        "body": '{"message": "successful"}',
+        # "body": final_body,
         "headers": {
             "content-type": "application/json"
         }
