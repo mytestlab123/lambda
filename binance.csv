@@ -1,11 +1,11 @@
 HEADER of TOKENs, Link
-ATOM
-NEAR
-FTM
-IOTX
-Metis
-TLOS
-XTZ
-EGLD
-FUSE
-DUSK
+ATOM, https://www.coingecko.com/en/coins/cosmos-hub
+NEAR, https://www.coingecko.com/en/coins/near
+FTM, https://www.coingecko.com/en/coins/fantom
+IOTX, https://www.coingecko.com/en/coins/iotex
+Metis, https://www.coingecko.com/en/coins/metis-token
+TLOS, https://www.coingecko.com/en/coins/telos
+XTZ, https://www.coingecko.com/en/coins/tezos
+EGLD, https://www.coingecko.com/en/coins/multiversx
+FUSE, https://www.coingecko.com/en/coins/fuse
+DUSK, https://www.coingecko.com/en/coins/dusk-network
